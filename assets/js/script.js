@@ -1,14 +1,12 @@
 var repoList = document.querySelector('ul');
 var fetchButton = document.getElementById("search");
-var key = '5047b93d8c8a3e00e320b778163f5545';
-var data;
-var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=51.51&lon=-0.12571&exclude=daily&units=metric&appid=5047b93d8c8a3e00e320b778163f5545';
-var requestUrl2='https://api.openweathermap.org/data/2.5/weather?id=2643743&units=metric&appid='+key;
-var requestUrl3='http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=5047b93d8c8a3e00e320b778163f5545'
+var openweatherkey = '5047b93d8c8a3e00e320b778163f5545';
+var googlekey = 'AIzaSyA5ury2VC7bslPGGb5hP-9OUTPdMF1fiIY';
+
 // `getApi` function is called when the `fetchButton` is clicked
 var city=[];
 var display_city;
-
+var q1;
 const sp_char = '\u{02109}';
 
 if(JSON.parse(localStorage.getItem('city_history'))!=null)  city = JSON.parse(localStorage.getItem('city_history')); 
@@ -144,8 +142,8 @@ function drawWeather( d ) {
 function check_location(c_name) {
 	display_city= c_name.charAt(0).toUpperCase() + c_name.slice(1);
 	var lat,lon;
-  var url='http://api.openweathermap.org/geo/1.0/direct?q='+c_name+'&limit=5&appid=5047b93d8c8a3e00e320b778163f5545'
- 	
+  var url= 'https://maps.googleapis.com/maps/api/geocode/json?address='+c_name+'&key='+googlekey;
+
   fetch(url)  
 	.then(function(response) { 
     if (response.status >= 200 && response.status <= 299) {
@@ -155,8 +153,10 @@ function check_location(c_name) {
     }
 	}) // Convert data to json
 	.then(function(data) {
-    lat=data[0].lat;    
-    lon=data[0].lon;
+		console.log(data);
+		lat=data.results[0].geometry.location.lat;
+		lon=data.results[0].geometry.location.lng;
+		console.log(lat,lon);
     Check_weather(lat,lon);
 	})
 	.catch(function(error) {
@@ -165,7 +165,7 @@ function check_location(c_name) {
 }
 
 function Check_weather(lat,lon) {
-	url='https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly&units=metric&appid=5047b93d8c8a3e00e320b778163f5545';
+	url='https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly&units=metric&appid='+openweatherkey;
   fetch(url)  
   .then(function(response) { 
   if (response.status >= 200 && response.status <= 299) {
