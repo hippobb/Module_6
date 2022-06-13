@@ -6,6 +6,7 @@ width:100%;
 }
 h2{
     padding-top: 10px;
+    font-size:calc(100%+1vw+1vh);
 }
 Header{
 padding: 20px;
@@ -81,4 +82,7 @@ p{
   }
 #current_detail{
 max-width: 60%;
+}
+.text-reponsive{
+    font-size:calc(100%+1vw+1vh);
 }
