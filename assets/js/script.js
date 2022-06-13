@@ -39,6 +39,13 @@ function drawmap(lat,lon)
     },
     zoom: 11
   });
+  const image =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+const beachMarker = new google.maps.Marker({
+  position: { lat: lat, lng: lon },
+  map,
+  icon: image,
+});
 }
   
 
