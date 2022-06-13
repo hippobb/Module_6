@@ -8,6 +8,7 @@ var city=[];
 var display_city;
 var q1;
 const sp_char = '\u{02109}';
+const sp_char2 = '\u{02103}';
 
 if(JSON.parse(localStorage.getItem('city_history'))!=null)  city = JSON.parse(localStorage.getItem('city_history')); 
 document.addEventListener('DOMContentLoaded', function() {
@@ -27,6 +28,20 @@ function C_to_F (temp){
 	return ((temp* 9/5) + 32).toFixed(2);
 
 }
+
+function drawmap(lat,lon)
+{
+  console.log("start",lat,lon);
+  map = new google.maps.Map( document.getElementById( 'map' ), {
+    center: {
+      lat: lat,
+      lng: lon
+    },
+    zoom: 11
+  });
+}
+  
+
 
   function Create_Button(){
 	var match=-1;
@@ -72,7 +87,7 @@ function drawWeather( d ) {
 	var icon;
 
   document.getElementById("current_city").innerHTML= display_city+" ("+(today.getMonth()+1)+"/"+cur_date +"/"+ today.getFullYear()+")";
-  document.getElementById("current_temp").innerHTML= "Temp: "+C_to_F(d.current.temp)+"  "+sp_char;
+  document.getElementById("current_temp").innerHTML= "Temp: "+C_to_F(d.current.temp)+"  "+sp_char+"  ("+d.current.temp+"  "+sp_char2+")";
   document.getElementById("current_wind").innerHTML= "Wind: "+d.current.wind_speed+"  MPH";
   document.getElementById("current_humidity").innerHTML= "Humidity: "+d.current.humidity+"  %";
   switch(parseInt(d.current.uvi)) {
@@ -157,8 +172,8 @@ function check_location(c_name) {
 		lat=data.results[0].geometry.location.lat;
 		lon=data.results[0].geometry.location.lng;
 		console.log(lat,lon);
-    Check_weather(lat,lon);
-	})
+		drawmap(lat,lon);
+   		Check_weather(lat,lon);	})
 	.catch(function(error) {
  console.log(error);
 	});

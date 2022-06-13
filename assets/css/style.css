@@ -37,7 +37,7 @@ text-align: center;
     border-style: solid;
     text-align: left;
     margin-bottom:30px ;
-    height:250px;
+    height:280px;
 }
 .card{
     background-color: rgb(14, 66, 111);
@@ -75,3 +75,9 @@ p{
 ,.forecast_header{
     display:none;
 }
+.map {
+    height: 250px;
+    width: 480px;
+    margin-top: 15px;
+
+  }

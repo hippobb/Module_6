@@ -29,11 +29,16 @@
       
       <div class="col-12 col-md-10">
         <section class="row justify-content-start current" id="current">
-          <h2 id="current_city"></h2>
-          <h3 id="current_temp">Temp: </h3>
-          <h3 id="current_wind">Wind: </h3>
-          <h3 id="current_humidity">Humidity: </h3>
-          <h3 id="current_UV">UV index: <span class="index" id="index"></span></h3>
+          <div class="col-12 col-md-6">
+          
+            <h2 id="current_city"></h2>
+            <h3 id="current_temp">Temp: </h3>
+            <h3 id="current_wind">Wind: </h3>
+            <h3 id="current_humidity">Humidity: </h3>
+            <h3 id="current_UV">UV index: <span class="index" id="index"></span></h3>
+          </div>
+          <div id="map" class="col-12 col-md-6 map"></div>
+
         </section>
         <section class="row justify-content-start forecast_header" id="forecast_header">
           <h2><b>5-Day Forecast:</b></h2><br>
@@ -87,6 +92,7 @@
     <hr />
     <!-- justify-content-center changes the alignment of flex items to center axis -->
   </body>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5ury2VC7bslPGGb5hP-9OUTPdMF1fiIY&callback=initMap" async defer></script>
   <script src="./assets/js/script.js"></script>
 </body>
 
