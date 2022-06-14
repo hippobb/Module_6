@@ -10,6 +10,7 @@ var q1;
 const sp_char = '\u{02109}';
 const sp_char2 = '\u{02103}';
 
+//Load the history record from the loca staorage if it is exisit
 if(JSON.parse(localStorage.getItem('city_history'))!=null)  city = JSON.parse(localStorage.getItem('city_history')); 
 document.addEventListener('DOMContentLoaded', function() {
 	var city = JSON.parse(localStorage.getItem('city_history')); 
@@ -29,9 +30,9 @@ function C_to_F (temp){
 
 }
 
+//Draw the map
 function drawmap(lat,lon)
 {
-  console.log("start",lat,lon);
   map = new google.maps.Map( document.getElementById( 'map' ), {
     center: {
       lat: lat,
@@ -49,8 +50,8 @@ const beachMarker = new google.maps.Marker({
 }
   
 
-
-  function Create_Button(){
+//Create the history button
+function Create_Button(){
 	var match=-1;
 	var name
 
@@ -86,7 +87,7 @@ const beachMarker = new google.maps.Marker({
 		}
 	}
   }
-
+//display the main content and 5 days forecast
 function drawWeather( d ) {
 	var today=new Date();
 	var color;
@@ -160,7 +161,7 @@ function drawWeather( d ) {
 
   Create_Button();
 }
-
+//Call the google api and get the lan, lon based on the city name
 function check_location(c_name) {
 	display_city= c_name.charAt(0).toUpperCase() + c_name.slice(1);
 	var lat,lon;
@@ -175,10 +176,8 @@ function check_location(c_name) {
     }
 	}) // Convert data to json
 	.then(function(data) {
-		console.log(data);
 		lat=data.results[0].geometry.location.lat;
 		lon=data.results[0].geometry.location.lng;
-		console.log(lat,lon);
 		drawmap(lat,lon);
    		Check_weather(lat,lon);	})
 	.catch(function(error) {
@@ -190,7 +189,7 @@ function initMap(){
 	
 }
 
-
+//call weather api and get the weather 
 function Check_weather(lat,lon) {
 	url='https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly&units=metric&appid='+openweatherkey;
   fetch(url)  
@@ -202,7 +201,6 @@ function Check_weather(lat,lon) {
     } // Convert data to json
 	})
 	.then(function(data) {
-    console.log(data);
 		drawWeather(data); // Call drawWeather
 	})
 	.catch(function(error) {	
