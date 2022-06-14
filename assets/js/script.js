@@ -185,6 +185,11 @@ function check_location(c_name) {
  console.log(error);
 	});
 }
+function initMap(){
+
+	
+}
+
 
 function Check_weather(lat,lon) {
 	url='https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly&units=metric&appid='+openweatherkey;
