@@ -2,7 +2,8 @@ var repoList = document.querySelector('ul');
 var fetchButton = document.getElementById("search");
 var openweatherkey = '5047b93d8c8a3e00e320b778163f5545';
 var googlekey = 'AIzaSyA5ury2VC7bslPGGb5hP-9OUTPdMF1fiIY';
-
+const weekday= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const short_weekday= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 // `getApi` function is called when the `fetchButton` is clicked
 var city=[];
 var display_city;
@@ -94,7 +95,7 @@ function drawWeather( d ) {
 	var cur_date=today.getDate();
 	var icon;
 
-  document.getElementById("current_city").innerHTML= display_city+" ("+(today.getMonth()+1)+"/"+cur_date +"/"+ today.getFullYear()+")";
+  document.getElementById("current_city").innerHTML= display_city+" ("+(today.getMonth()+1)+"/"+cur_date +"/"+ today.getFullYear()+"  "+weekday[today.getDay()]+")";
   document.getElementById("current_temp").innerHTML= "Temp: "+C_to_F(d.current.temp)+"  "+sp_char+"  ("+d.current.temp+"  "+sp_char2+")";
   document.getElementById("current_wind").innerHTML= "Wind: "+d.current.wind_speed+"  MPH";
   document.getElementById("current_humidity").innerHTML= "Humidity: "+d.current.humidity+"  %";
@@ -122,7 +123,7 @@ function drawWeather( d ) {
   document.getElementById("forecast").setAttribute("style" , "display:flex");
   document.getElementById("forecast_header").setAttribute("style" , "display:flex");
 
-  document.getElementById("day_1_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+1) +"/"+ today.getFullYear()
+  document.getElementById("day_1_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+1) +"/"+ today.getFullYear()+" ("+short_weekday[(today.getDay()+1)%7]+")";
     
   icon="http://openweathermap.org/img/wn/"+d.daily[0].weather[0].icon+"@2x.png";
 
@@ -131,28 +132,28 @@ function drawWeather( d ) {
   document.getElementById("day_1_wind").innerHTML= "Wind: "+d.daily[0].wind_speed+"  MPH";
   document.getElementById("day_1_humidity").innerHTML= "Humidity: "+d.daily[0].humidity+"  %";
     
-  document.getElementById("day_2_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+2) +"/"+ today.getFullYear()
+  document.getElementById("day_2_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+2) +"/"+ today.getFullYear()+" ("+short_weekday[(today.getDay()+2)%7]+")";
   icon="http://openweathermap.org/img/wn/"+d.daily[1].weather[0].icon+"@2x.png";
   document.getElementById("day_2_icon").setAttribute("src" , icon);
   document.getElementById("day_2_temp").innerHTML= "Temp: "+C_to_F(d.daily[1].temp.day)+"  "+sp_char;
   document.getElementById("day_2_wind").innerHTML= "Wind: "+d.daily[1].wind_speed+"  MPH";
   document.getElementById("day_2_humidity").innerHTML= "Humidity: "+d.daily[1].humidity+"  %";
 
-  document.getElementById("day_3_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+3) +"/"+ today.getFullYear()
+  document.getElementById("day_3_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+3) +"/"+ today.getFullYear()+" ("+short_weekday[(today.getDay()+3)%7]+")";
   icon="http://openweathermap.org/img/wn/"+d.daily[2].weather[0].icon+"@2x.png";
   document.getElementById("day_3_icon").setAttribute("src" , icon);
   document.getElementById("day_3_temp").innerHTML= "Temp: "+C_to_F(d.daily[2].temp.day)+"  "+sp_char;
   document.getElementById("day_3_wind").innerHTML= "Wind: "+d.daily[2].wind_speed+"  MPH";
   document.getElementById("day_3_humidity").innerHTML= "Humidity: "+d.daily[2].humidity+"  %";
 
-  document.getElementById("day_4_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+4) +"/"+ today.getFullYear()
+  document.getElementById("day_4_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+4) +"/"+ today.getFullYear()+" ("+short_weekday[(today.getDay()+4)%7]+")";
   icon="http://openweathermap.org/img/wn/"+d.daily[3].weather[0].icon+"@2x.png";
   document.getElementById("day_4_icon").setAttribute("src" , icon);
   document.getElementById("day_4_temp").innerHTML= "Temp: "+C_to_F(d.daily[3].temp.day)+"  "+sp_char;
   document.getElementById("day_4_wind").innerHTML= "Wind: "+d.daily[3].wind_speed+"  MPH";
   document.getElementById("day_4_humidity").innerHTML= "Humidity: "+d.daily[3].humidity+"  %";
 
-  document.getElementById("day_5_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+5) +"/"+ today.getFullYear()
+  document.getElementById("day_5_date").innerHTML=(today.getMonth()+1)+"/"+(cur_date+5) +"/"+ today.getFullYear()+" ("+short_weekday[(today.getDay()+5)%7]+")";
   icon="http://openweathermap.org/img/wn/"+d.daily[4].weather[0].icon+"@2x.png";
   document.getElementById("day_5_icon").setAttribute("src" , icon);
   document.getElementById("day_5_temp").innerHTML= "Temp: "+C_to_F(d.daily[4].temp.day)+"  "+sp_char;
